@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  nethermind:
+    image: nethermind/nethermind:latest
+    volumes:
+      - ./nethermind/bloxberg.json:/nethermind/chainspec/bloxberg.json
+      - ./nethermind/config.json:/nethermind/configs/bloxberg.cfg
+      - ./nethermind/static-nodes.json:/nethermind/Data/static-nodes-bloxberg.json
+      - ./nethermind/db/bloxberg:/nethermind/nethermind_db/bloxberg
+      - ./nethermind/keystore:/nethermind/keystore
+      - ./nethermind/logs:/nethermind/logs
+    command: --config /nethermind/configs/bloxberg.cfg
+    user: "0:0"
+    ports:
+      - 8545:8545
+      - 8546:8546
+      - 30303:30303
+    restart: unless-stopped
